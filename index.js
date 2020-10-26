@@ -1,4 +1,4 @@
-const search = document.getElementById('search')
+let search = document.getElementById('search')
 
 
 let restaurants;
@@ -10,6 +10,17 @@ const getRestaurants = async () =>{
 	restaurants = await response.json();
 	generateRestaurants(restaurants)
 };
+
+
+
+const searchCriteria = (e) =>{
+	const searchItem = e.target.value;
+	filteredItems = restaurants.filter((curRestaurant) =>{
+		return searchItem === curRestaurant.name /*Aqui deberia buscar dentro del .nombre? como??*/
+		generateRestaurants(searchCriteria)
+		})
+	}
+	
 
 
 const generateRestaurants = (x) =>{
@@ -42,7 +53,7 @@ const generateRestaurants = (x) =>{
 
 };
 getRestaurants()
-
+search.addEventListener('keyup', searchCriteria);
 
 
 // const postReview = async () =>{
