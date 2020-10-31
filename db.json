@@ -1,16 +1,35 @@
+
 {
   "restaurants": [
     {
       "id": 1,
-      "name": "Vedge",
+      "name": "Tina",
       "address": "1221 Locust St, Philadelphia, PA 19107",
-      "imgUrl": "https://s3-media0.fl.yelpcdn.com/bphoto/TMFHugi3h9V7x-fDBFTpgA/o.jpg"
+      "imgUrl": "https://www.saborlatinofoodshow.com/img/intro_logo.png"
     },
     {
       "id": 2,
-      "name": "Casablanca",
+      "name": "Sabor Latino",
+      "address": "293 Ashmore Ave, Trenton, NJ 08611",
+      "imgUrl": "https://www.saborlatinofoodshow.com/img/intro_logo.png"
+    },
+    {
+      "id": 3,
+      "name": "Mauceri's Pizzeria & Hispanic Restaurant",
+      "address": " 945 Liberty St, Trenton, NJ 08611",
+      "imgUrl": ""
+    },
+    {
+      "id": 4,
+      "name": "Casdeluna",
+      "address": "800 Chestnut Ave, Trenton, NJ 08611",
+      "imgUrl": ""
+    },
+    {
+      "id": 5,
+      "name": "Prince Fried Chicken",
       "address": "140 Washington St, Trenton, NJ 08611",
-      "imgUrl": "https://scontent-lga3-2.xx.fbcdn.net/v/t31.0-8/23593527_184239602127127_1483972741242975087_o.jpg?_nc_cat=105&_nc_sid=6e5ad9&_nc_ohc=lPsv8-l_fZgAX9GmNql&_nc_ht=scontent-lga3-2.xx&oh=2a3896d196338818f18251d4ab41f31f&oe=5FB2F593"
+      "imgUrl": "https://www.princechicken.com/Ewing/images/prince/images/logo.png"
     }
   ],
   "reviews": [
@@ -18,19 +37,61 @@
       "id": 1,
       "restaurantId": 1,
       "stars": 5,
-      "text": "Impossibly good vegan food"
+      "text": "Impossibly good Itallian food"
     },
     {
       "id": 2,
       "restaurantId": 1,
       "stars": 2,
-      "text": "I didn't know they meant vedge literally"
+      "text": "This pizza is not actually itallian"
     },
     {
+      "id": 3,
       "restaurantId": 2,
       "stars": 1,
-      "text": "They keep rising their prices, quality is the same",
-      "id": 3
+      "text": "They keep rising their prices, quality is the same"
+    },
+    {
+      "id": 4,
+      "restaurantId": 1,
+      "stars": 5,
+      "text": "Best Pizza Ever"
+    },
+    {
+      "id": 5,
+      "restaurantId": 3,
+      "stars": 2,
+      "text": "Well, the food was ok, but services was pretty bad"
+    },
+    {
+      "id": 6,
+      "restaurantId": 5,
+      "stars": 1,
+      "text": "They keep rising their prices, quality is the same"
+    },
+    {
+      "id": 7,
+      "restaurantId": 1,
+      "stars": 1,
+      "text": "Pizza came out cold"
+    },
+    {
+      "id": 8,
+      "restaurantId": 2,
+      "stars": 2,
+      "text": "The manager was yelling at the employees, employees were nice tho"
+    },
+    {
+      "id": 9,
+      "restaurantId": 6,
+      "stars": 1,
+      "text": "They keep rising their prices, quality is the same"
+    },
+    {
+      "id": 10,
+      "restaurantId": 9,
+      "stars": 1,
+      "text": "why?"
     }
-  ] 
+  ]
 }
