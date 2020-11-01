@@ -4,10 +4,12 @@
 	margin: 0;
 }
 
+/*.row.fix{ display: flex, flex-wrap: wrap; }*/
+
 .resPic
 {
 	min-height: 100%;
-	background: url('images/logoBuenProvecho.png') no-repeat;
+	background: url('images/imgUnavailable.png') center no-repeat;
 	background-size: contain ;
 
 }
@@ -25,5 +27,6 @@
 	background: url('images/img5stars.png') no-repeat;
 	background-size: contain ;
 	height: 20px;
+
 }
 
