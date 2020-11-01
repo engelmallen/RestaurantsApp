@@ -79,11 +79,11 @@ const generateRestaurants = (x) =>{
 	// console.log(getThisReview)
 	searchByRate(getThisReview)
 	curReviewer = generateReviews(getThisReview)
-	
+
 
 		return `
-<div class="col-12 px-0 mx-0 mb-1 row">	
-		<div class="restaurantTab col-12 w-100 row m-0 p-3 bg-light">
+<div class="col-12 px-0 mx-0 mb-2 row">	
+		<div class="restaurantTab col-12 w-100 row m-0 p-3 bg-light rounded-top ">
 
 			<div class="resPic col-2 p-0 ">
 			<img src="${curRestaurant.imgUrl}" width="100%">
