@@ -6,6 +6,9 @@ let restaurants;
 let reviews;
 let starCounter = 0;
 
+// const holdingClass = (currentID){
+// 	this.currentID = currentID
+// }
 
 const getRestaurants = async () =>{
 	const response = await fetch("http://localhost:3000/restaurants");
@@ -19,7 +22,6 @@ const getReviews = async () =>{
 
 getRestaurants()
 getReviews()
-
 
 const searchCriteria = (e) =>{
 	pad.innerHTML = ''
@@ -47,7 +49,6 @@ const searchByRate =  (filtered) =>{
 		}) 
 		starCounter /= filtered.length
 		starCounter = Math.round(starCounter)
-		// console.log(starCounter)
 		return starCounter
 	}
 
@@ -69,17 +70,35 @@ const generateReviews = (curReview) =>{
 	console.log(mappedReviews)
 }
 
+const summonForm = (e) =>{
+	let inheriId = e.target.name
+
+	// return 	`<div id="formRating" class="bg-light p-3 rounded container">
+	// 			<input id="name" type="text" placeholder="name" class="col-6">
+	// 			<label for="rateByUser">Rate:</label>
+	// 			<select id="rateByUser" name="rateByUser" >
+	// 			  <option value="1"> <a href="">1</a> </option>
+	// 			  <option value="2"> <a href="">2</a> </option>
+	// 			  <option value="3"> <a href="">3</a> </option>
+	// 			  <option value="4"> <a href="">4</a> </option>
+	// 			  <option value="5"> <a href="">5</a> </option>
+	// 			</select>	
+	// 			<input id="text" type="text" placeholder="Write a Review" class="col-12">
+	// 			<input type="submit" value="submit" class="px-2 btn-success my-2">			
+	// 	</div>	`
+}
+
 const generateRestaurants = (x) =>{
 	const pad = document.getElementById('pad')
 	const mappedRestaurants = x.map((curRestaurant,curReviewer) => {
 	
 		let getThisReview = reviews.filter((curId)=>{
 		return curRestaurant.id === curId.restaurantId
+
 	})
-	// console.log(getThisReview)
 	searchByRate(getThisReview)
 	curReviewer = generateReviews(getThisReview)
-
+	let currentRestaurantId = curRestaurant.id
 
 		return `
 <div class="col-12 px-0 mx-0 mb-2 row">	
@@ -95,25 +114,43 @@ const generateRestaurants = (x) =>{
 			</div>
 
 			<div class="ratings col-2 row py-2 text-center" >
-				<input type="button" class="reviews col-12 h4 bg-info text-dark" value ="Reviews">
-				<input type="button" class="rate col-12 h4 bg-success text-dark" value ="Rate it">
+				<input type="button" class="btnReviews col-12 h4 bg-info text-dark" value ="Reviews">
+				<input type="button" class="rate col-12 h4 bg-success text-dark" name="${currentRestaurantId}" value ="Rate it">
 			</div>
 			
 			</div>
 			<div class="row col-12 w-100 m-0 p-0"> ${curReviewer} </div> 
 		</div>`
 
-
 	})
 
 		pad.innerHTML = mappedRestaurants.join('')
-
+		actionRate()
 };
 
+const actionRate = ()=>{
+		let rate = document.getElementsByClassName('rate')
+		console.log(rate)
+		for (var i = 0; i < rate.length; i++) {
+			rate[i].addEventListener('click', (e)=>{
+			console.log(e.target.name)
+		})
+		}
+		
+
+		// rate.addEventListener('click', (e)=>{
+		// 	for (var i = 0; i < e.length; i++) {
+		// console.log(e.target.name)	
+		// }
+	// })
+
+
+}
 
 if (search!=""){
 search.addEventListener('keyup', searchCriteria  );}
 else{
 	getRestaurants()
 	getReviews()
+	generateRestaurants()
 }

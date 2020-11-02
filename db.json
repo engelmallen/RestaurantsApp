@@ -36,62 +36,78 @@
     {
       "id": 1,
       "restaurantId": 1,
+      "userID": 1,
       "stars": 5,
       "text": "Impossibly good Itallian food"
     },
     {
       "id": 2,
       "restaurantId": 1,
+      "userID": 1,
       "stars": 2,
       "text": "This pizza is not actually itallian"
     },
     {
       "id": 3,
       "restaurantId": 2,
+      "userID": 1,
       "stars": 1,
       "text": "They keep rising their prices, quality is the same"
     },
     {
       "id": 4,
       "restaurantId": 1,
+      "userID": 1,
       "stars": 5,
       "text": "Best Pizza Ever"
     },
     {
       "id": 5,
       "restaurantId": 3,
+      "userID": 1,
       "stars": 2,
       "text": "Well, the food was ok, but services was pretty bad"
     },
     {
       "id": 6,
       "restaurantId": 5,
+      "userID": 1,
       "stars": 1,
       "text": "They keep rising their prices, quality is the same"
     },
     {
       "id": 7,
       "restaurantId": 1,
+      "userID": 1,
       "stars": 1,
       "text": "Pizza came out cold"
     },
     {
       "id": 8,
       "restaurantId": 2,
+      "userID": 1,
       "stars": 2,
       "text": "The manager was yelling at the employees, employees were nice tho"
     },
     {
       "id": 9,
       "restaurantId": 6,
+      "userID": 1,
       "stars": 1,
       "text": "They keep rising their prices, quality is the same"
     },
     {
       "id": 10,
       "restaurantId": 9,
+      "userID": 1,
       "stars": 1,
       "text": "why?"
+    }
+  ],
+  "users":[
+    {
+      "id": 1,
+      "userName": "Mr. User"
     }
   ]
 }

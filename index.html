@@ -11,7 +11,7 @@
 
 <div class="jumbotron h1 text-center bg-warning"> AfterEat </div>
 
-<div class="container p-0">
+<div id="containerArea" class="container p-0">
 
 	<div class="searchArea container text-center bg-light p-3 rounded m-0 mb-2 border-top-5">
 		<input id="search" type="text" placeholder="Search">
@@ -27,6 +27,19 @@
 
 
 	</div>
+	<div id="formRating" class="bg-light p-3 rounded container">
+			<input id="name" type="text" placeholder="name" class="col-6">
+			<label for="rateByUser">Rate:</label>
+			<select id="rateByUser" name="rateByUser" >
+			  <option value="1"> <a href="">1</a> </option>
+			  <option value="2"> <a href="">2</a> </option>
+			  <option value="3"> <a href="">3</a> </option>
+			  <option value="4"> <a href="">4</a> </option>
+			  <option value="5"> <a href="">5</a> </option>
+			</select>	
+			<input id="text" type="text" placeholder="Write a Review" class="col-12">
+			<input type="submit" value="submit" class="px-2 btn-success my-2">			
+	</div>	
 </div>
 
 
