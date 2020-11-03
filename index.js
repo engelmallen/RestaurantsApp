@@ -72,13 +72,15 @@ const generateReviews = (curReview) =>{
 }
 
 const summonForm = (currentRateId) =>{
-	let ratedRestaurant = () => {
-			return restaurants.filter((index)=> {
-			return index.id === currentRateId
-		});}
+	 		thisiD = parseInt(currentRateId)
+	 		
+	 		let ratedRestaurant = restaurants.filter((index)=> {
+			return index.id == 2})
+
+	console.log('currentRateId ='+currentRateId)
 	console.log(restaurants)
-	console.log('ratedId = ' + currentRateId)
-	console.log('Ratedrestaurants = ' + ratedRestaurant())
+	console.log('thisiD = ' + thisiD)
+	console.log('Ratedrestaurants = ' + ratedRestaurant)
 	formContainer.innerHTML = ''
 	formContainer.innerHTML +=  	`
 	<div id="formRating" class="bg-light p-3 rounded container border-5 border-warning">
@@ -143,7 +145,7 @@ const actionRate = () =>{
 		for (var i = 0; i < rate.length; i++) {
 			rate[i].addEventListener('click', (e)=>{
 			// console.log(e.target.name)
-			summonForm(e.target.name)
+			summonForm(parseInt(e.target.name))
 			})
 		}
 		
