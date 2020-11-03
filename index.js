@@ -1,5 +1,6 @@
 let search = document.getElementById('search')
 const pad = document.getElementById('pad')
+const formContainer = document.getElementById('formContainer')
 const starBtns = document.getElementsByClassName('starBtns')[0]
 
 let restaurants;
@@ -70,22 +71,30 @@ const generateReviews = (curReview) =>{
 	console.log(mappedReviews)
 }
 
-const summonForm = (e) =>{
-	let inheriId = e.target.name
-
-	// return 	`<div id="formRating" class="bg-light p-3 rounded container">
-	// 			<input id="name" type="text" placeholder="name" class="col-6">
-	// 			<label for="rateByUser">Rate:</label>
-	// 			<select id="rateByUser" name="rateByUser" >
-	// 			  <option value="1"> <a href="">1</a> </option>
-	// 			  <option value="2"> <a href="">2</a> </option>
-	// 			  <option value="3"> <a href="">3</a> </option>
-	// 			  <option value="4"> <a href="">4</a> </option>
-	// 			  <option value="5"> <a href="">5</a> </option>
-	// 			</select>	
-	// 			<input id="text" type="text" placeholder="Write a Review" class="col-12">
-	// 			<input type="submit" value="submit" class="px-2 btn-success my-2">			
-	// 	</div>	`
+const summonForm = (currentRateId) =>{
+	let ratedRestaurant = () => {
+			return restaurants.filter((index)=> {
+			return index.id === currentRateId
+		});}
+	console.log(restaurants)
+	console.log('ratedId = ' + currentRateId)
+	console.log('Ratedrestaurants = ' + ratedRestaurant())
+	formContainer.innerHTML = ''
+	formContainer.innerHTML +=  	`
+	<div id="formRating" class="bg-light p-3 rounded container border-5 border-warning">
+				<div class="h3 text-weight-bold text-center"> Tell Us About ${ratedRestaurant.name}  </div>
+				<input id="name" type="text" placeholder="name" class="col-6">
+				<label for="rateByUser">Rate:</label>
+					<select id="rateByUser" name="rateByUser" >
+					  <option value="1"> <a href="">1</a> </option>
+					  <option value="2"> <a href="">2</a> </option>
+					  <option value="3"> <a href="">3</a> </option>
+					  <option value="4"> <a href="">4</a> </option>
+					  <option value="5"> <a href="">5</a> </option>
+					</select>	
+				<input id="text" type="text" placeholder="Write a Review" class="col-12">
+				<input type="submit" value="submit" class="px-2 btn-success my-2">			
+	</div>`
 }
 
 const generateRestaurants = (x) =>{
@@ -128,13 +137,14 @@ const generateRestaurants = (x) =>{
 		actionRate()
 };
 
-const actionRate = ()=>{
+const actionRate = () =>{
 		let rate = document.getElementsByClassName('rate')
-		console.log(rate)
+		// console.log(rate)
 		for (var i = 0; i < rate.length; i++) {
 			rate[i].addEventListener('click', (e)=>{
-			console.log(e.target.name)
-		})
+			// console.log(e.target.name)
+			summonForm(e.target.name)
+			})
 		}
 		
 
