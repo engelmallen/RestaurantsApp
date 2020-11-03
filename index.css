@@ -1,7 +1,40 @@
+*
+{
+	padding: 0;
+	margin: 0;
+}
+
+/*.row.fix{ display: flex, flex-wrap: wrap; }*/
+
 .resPic
 {
-	height: 70px;
-	background: url('images/logoBuenProvecho.png') no-repeat;
+	min-height: 100%;
+	background: url('images/imgUnavailable.png') center no-repeat;
 	background-size: contain ;
 
+}
+
+.profilePic
+{
+	min-height: 100%;
+	background: url('images/imgEmptyProfile.png') no-repeat;
+	background-size: contain ;
+
+}
+
+.stars
+{
+	background: url('images/img5stars.png') no-repeat;
+	background-size: contain ;
+	height: 20px;
+
+}
+
+#formRating
+{
+	/*display: none;*/
+	position: fixed;
+	z-index: 1000;
+	margin-top: 10%;
+	border:  5px solid orange;
 }

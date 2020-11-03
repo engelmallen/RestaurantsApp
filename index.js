@@ -1,78 +1,168 @@
+let search = document.getElementById('search')
+const pad = document.getElementById('pad')
+const formContainer = document.getElementById('formContainer')
+const starBtns = document.getElementsByClassName('starBtns')[0]
+
+let restaurants;
+let reviews;
+let starCounter = 0;
+
+// const holdingClass = (currentID){
+// 	this.currentID = currentID
+// }
+
 const getRestaurants = async () =>{
 	const response = await fetch("http://localhost:3000/restaurants");
-	const restaurants = await response.json();
-	return restaurants;
-};
+	restaurants = await response.json();
+	}
 
-const postReview = async () =>{
+const getReviews = async () =>{
+	const response = await fetch("http://localhost:3000/reviews");
+	reviews = await response.json();
+	}
+
+getRestaurants()
+getReviews()
+
+const searchCriteria = (e) =>{
+	pad.innerHTML = ''
+	const searchItem = e.target.value.toLowerCase();
+	filteredRestaurants = restaurants.filter((curRestaurant) =>{
+		return curRestaurant.name.toLowerCase().includes(searchItem)
+		})
+	generateRestaurants(filteredRestaurants)
+	}
+
+const sortIt = ( a, b ) =>{
+  if ( a.stars < b.stars ){
+    return 1;
+  }
+  if ( a.stars > b.stars ){
+    return -1;
+  }
+  return 0;
+}
+
+const searchByRate =  (filtered) =>{
+	starCounter = 0; 
+	filtered.sort(sortIt).forEach((f)=>{
+		return starCounter += f.stars
+		}) 
+		starCounter /= filtered.length
+		starCounter = Math.round(starCounter)
+		return starCounter
+	}
+
+const generateReviews = (curReview) =>{
+	var mappedReviews = curReview.map((mapped) =>{
+		return `
+		<div class="custumerReview border-bottom border-top-1 col-12 bg-white py-2">
+					<div class="userName h6 col font-weight-bold px-2"> Mr.User </div>
+					<div class="stars col-4" style="background: url('images/img${mapped.stars}stars.png') no-repeat; background-size: contain"></div>	
+		
+					<div class="userRevew col-12 border-top-1" > 
+						${mapped.text}
+					</div>
+		
+				</div>`
+
+	})
+	return mappedReviews.join('')
+	console.log(mappedReviews)
+}
+
+const summonForm = (currentRateId) =>{
+	 		thisiD = parseInt(currentRateId)
+	 		
+	 		let ratedRestaurant = restaurants.filter((index)=> {
+			return index.id == 2})
+
+	console.log('currentRateId ='+currentRateId)
+	console.log(restaurants)
+	console.log('thisiD = ' + thisiD)
+	console.log('Ratedrestaurants = ' + ratedRestaurant)
+	formContainer.innerHTML = ''
+	formContainer.innerHTML +=  	`
+	<div id="formRating" class="bg-light p-3 rounded container border-5 border-warning">
+				<div class="h3 text-weight-bold text-center"> Tell Us About ${ratedRestaurant.name}  </div>
+				<input id="name" type="text" placeholder="name" class="col-6">
+				<label for="rateByUser">Rate:</label>
+					<select id="rateByUser" name="rateByUser" >
+					  <option value="1"> <a href="">1</a> </option>
+					  <option value="2"> <a href="">2</a> </option>
+					  <option value="3"> <a href="">3</a> </option>
+					  <option value="4"> <a href="">4</a> </option>
+					  <option value="5"> <a href="">5</a> </option>
+					</select>	
+				<input id="text" type="text" placeholder="Write a Review" class="col-12">
+				<input type="submit" value="submit" class="px-2 btn-success my-2">			
+	</div>`
+}
+
+const generateRestaurants = (x) =>{
+	const pad = document.getElementById('pad')
+	const mappedRestaurants = x.map((curRestaurant,curReviewer) => {
 	
-	const newReview = {
-		restaurantId: 2,
-		stars: 1,
-		text: 'They keep rising their prices, quality is the same',
-		}
+		let getThisReview = reviews.filter((curId)=>{
+		return curRestaurant.id === curId.restaurantId
 
-	await fetch("http://localhost:3000/reviews", {
-		method: "POST",
-		body: JSON.stringify(newReview),
-		headers: {	
-			accept: 'application/json', 
-					'Content-Type': "application/json",
-				},
+	})
+	searchByRate(getThisReview)
+	curReviewer = generateReviews(getThisReview)
+	let currentRestaurantId = curRestaurant.id
 
-	});
+		return `
+<div class="col-12 px-0 mx-0 mb-2 row">	
+		<div class="restaurantTab col-12 w-100 row m-0 p-3 bg-light rounded-top ">
+
+			<div class="resPic col-2 p-0 ">
+			<img src="${curRestaurant.imgUrl}" width="100%">
+			</div>
+			<div class="restaurantInfo col row px-5">
+				<div class=" bg-light col-12 h3 py-2"> ${curRestaurant.name} </div>
+				<div class=" bg-light col-12 py-2 pl-0"> ${curRestaurant.address} </div>
+				<div class="stars col-12 starsContainer text-center" style="background: url('images/img${starCounter}stars.png') no-repeat; background-size: contain"></div>
+			</div>
+
+			<div class="ratings col-2 row py-2 text-center" >
+				<input type="button" class="btnReviews col-12 h4 bg-info text-dark" value ="Reviews">
+				<input type="button" class="rate col-12 h4 bg-success text-dark" name="${currentRestaurantId}" value ="Rate it">
+			</div>
+			
+			</div>
+			<div class="row col-12 w-100 m-0 p-0"> ${curReviewer} </div> 
+		</div>`
+
+	})
+
+		pad.innerHTML = mappedRestaurants.join('')
+		actionRate()
 };
 
-/*
+const actionRate = () =>{
+		let rate = document.getElementsByClassName('rate')
+		// console.log(rate)
+		for (var i = 0; i < rate.length; i++) {
+			rate[i].addEventListener('click', (e)=>{
+			// console.log(e.target.name)
+			summonForm(parseInt(e.target.name))
+			})
+		}
+		
 
-Pre-requisites: install JSON server: https://github.com/typicode/json-server#getting-started
+		// rate.addEventListener('click', (e)=>{
+		// 	for (var i = 0; i < e.length; i++) {
+		// console.log(e.target.name)	
+		// }
+	// })
 
-Create a web application that shows a list of restaurants from your database and their reviews. 
 
-Core requirements:
+}
 
-1.  Populate the page with restaurants from your local database, 
-    showing the name, address, an image, and the average review score. 
-    For instance, if there are 2 reviews on a restaurant, one for 
-    4 stars and one for 3 stars, the average review score should be 3.5. Use .map().
-
-2.  Show the reviews from your local database below each restaurant, 
-    showing the text and star rating. Use .filter() and .map().
-
-3. Sort the restaurants from highest-rated to lowest-rated. Use .sort().
-
-4.  Create a form that allows the user to write a new review and give 
-    a star rating. When the user submits the form the new review should 
-    show up on the page WITHOUT reloading the page.
-
-    Complete at least one of the following requirements then complete as many 
-    others as possible in whichever order you'd like.
-
-1.  The form should not be shown until someone clicks a button. 
-    Make sure the correct restaurantId is being added to the review. 
-    Only one form should be visible at a time.
-
-2.  The reviews should only be shown below the restaurant after 
-    the user clicks a restaurant. Only one restaurant's reviews 
-    should be visible at a time.
-
-3.  Add the option to delete reviews, but not restaurants. 
-    Deleting a review should remove it from the database. 
-    After deleting, show the updated list of reviews WITHOUT reloading the page.
-
-4. 	Add users to the database. Associate them with reviews and show the user's details on the review. 
-	Use the .find() method to do so.
-
-    Grading criteria:
-
-1.  Use the methods that are listed in each requirement.
-2.  Use async/await and fetch and use only the data that exists in your database.
-3.  Use only ES6+ techniques if needed: template strings (`${}`), arrow functions, forEach(), etc.
-4.  Use GitHub and make a new branch for each numbered task, so at least 5 branches total. 
-    Give the branch a meaningful name using this convention: feature/show-restaurants. 
-    Merge the feature branch into your main branch when you complete the task.
-5.  Do not have any extraneous comments beyond explanations of code (if needed) 
-    in your final result. Do not have any console.logs, in comments or otherwise.
-6.  CSS is not necessary and will not be graded but is encouraged for the sake of practice.
-
-*bx n
+if (search!=""){
+search.addEventListener('keyup', searchCriteria  );}
+else{
+	getRestaurants()
+	getReviews()
+	generateRestaurants()
+}
