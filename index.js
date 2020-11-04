@@ -7,9 +7,10 @@ let restaurants;
 let reviews;
 let starCounter = 0;
 let ratingRestaurant;
-// const holdingClass = (currentID){
-// 	this.currentID = currentID
-// }
+
+const closeForm = () =>{
+	formContainer.innerHTML = ''
+}
 
 const getRestaurants = async () =>{
 	const response = await fetch("http://localhost:3000/restaurants");
@@ -53,11 +54,7 @@ const searchByRate =  (filtered) =>{
 		return starCounter
 	}
 
-// const postReview = async () =>{
-// 	const postingReview = {
-// 		restaurantId:
-// 	}
-// }
+
 
 const generateReviews = (curReview) =>{
 	var mappedReviews = curReview.map((mapped) =>{
@@ -77,28 +74,37 @@ const generateReviews = (curReview) =>{
 	console.log(mappedReviews)
 }
 
-const summonForm = (currentRateId) =>{
-	 		
+const postReview = async () =>{
+	const postingReview = {
+		userName: userName.value,
+		restaurantId: ratingRestaurant.id,
+		stars: rateByUser.value,
+		text: myReview.value,
+	}
+	await fetch("http://localhost:3000/reviews",{
+		method: "POST",
+		body: JSON.stringify(postingReview),
+		headers:{
+		Accept:"application/json", "Content-Type": "application/json",
+		},
+	});
+	await closeForm()
+};
 
-	 		const testing = () => {
+const summonForm = (currentRateId) =>{
+	 		const fillRatingRestaurant = () => {
 	 			for (var i = 0; i < restaurants.length; i++) {
 	 				if(restaurants[i].id === currentRateId)	{
-	 					 				ratingRestaurant = restaurants[i]}
-	 			
+	 					ratingRestaurant = restaurants[i]}
+	 				}
 	 			}
-	 		}
-	 		testing()
-
-	// console.log('currentRateId ='+currentRateId)
-	// console.log(restaurants)
-	// console.log('thisiD = ' + typeof thisiD)
-	console.log(testing())
+	 		fillRatingRestaurant()
 	formContainer.innerHTML = ''
-	formContainer.innerHTML +=  	`
+	formContainer.innerHTML = `
 		<div id="formRating" class="bg-light p-3 rounded container border-5 border-warning row">
 				<div class="h3 text-weight-bold text-center col-11"> Tell Us About <strong> ${ratingRestaurant.name} </strong> </div>
 				<div class="btn-danger float-right px-1 py-2 text-light text-center col">X</div>
-				<input id="name" type="text" placeholder="name" class="col-6 py-1 col-4">
+				<input id="userName" type="text" placeholder="name" class="col-6 py-1 col-4">
 				<div>
 					<label for="rateByUser col-2">Rate:</label>
 						<select id="rateByUser" name="rateByUser" >
@@ -109,12 +115,11 @@ const summonForm = (currentRateId) =>{
 					  		<option value="5"> <a href="">5</a> </option>
 						</select>
 				</div>
-				<input id="text" type="text" placeholder="Write a Review" class="col-12 py-1 my-2">
+				<input id="myReview" type="text" placeholder="Write a Review" class="col-12 py-1 my-2">
 				<input id="submitReview" type="submit" value="submit" class="px-2 btn-success my-2">			
 		</div>`
-
-	submitReview.addEventListener('click', )	
-
+	const submitReview = document.getElementById('submitReview')
+	// submitReview.addEventListener('click', postReview(currentRateId))	
 }
 
 const generateRestaurants = (x) =>{
