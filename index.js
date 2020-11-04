@@ -6,7 +6,7 @@ const starBtns = document.getElementsByClassName('starBtns')[0]
 let restaurants;
 let reviews;
 let starCounter = 0;
-
+let ratingRestaurant;
 // const holdingClass = (currentID){
 // 	this.currentID = currentID
 // }
@@ -53,6 +53,12 @@ const searchByRate =  (filtered) =>{
 		return starCounter
 	}
 
+// const postReview = async () =>{
+// 	const postingReview = {
+// 		restaurantId:
+// 	}
+// }
+
 const generateReviews = (curReview) =>{
 	var mappedReviews = curReview.map((mapped) =>{
 		return `
@@ -72,31 +78,43 @@ const generateReviews = (curReview) =>{
 }
 
 const summonForm = (currentRateId) =>{
-	 		thisiD = parseInt(currentRateId)
 	 		
-	 		let ratedRestaurant = restaurants.filter((index)=> {
-			return index.id == 2})
 
-	console.log('currentRateId ='+currentRateId)
-	console.log(restaurants)
-	console.log('thisiD = ' + thisiD)
-	console.log('Ratedrestaurants = ' + ratedRestaurant)
+	 		const testing = () => {
+	 			for (var i = 0; i < restaurants.length; i++) {
+	 				if(restaurants[i].id === currentRateId)	{
+	 					 				ratingRestaurant = restaurants[i]}
+	 			
+	 			}
+	 		}
+	 		testing()
+
+	// console.log('currentRateId ='+currentRateId)
+	// console.log(restaurants)
+	// console.log('thisiD = ' + typeof thisiD)
+	console.log(testing())
 	formContainer.innerHTML = ''
 	formContainer.innerHTML +=  	`
-	<div id="formRating" class="bg-light p-3 rounded container border-5 border-warning">
-				<div class="h3 text-weight-bold text-center"> Tell Us About ${ratedRestaurant.name}  </div>
-				<input id="name" type="text" placeholder="name" class="col-6">
-				<label for="rateByUser">Rate:</label>
-					<select id="rateByUser" name="rateByUser" >
-					  <option value="1"> <a href="">1</a> </option>
-					  <option value="2"> <a href="">2</a> </option>
-					  <option value="3"> <a href="">3</a> </option>
-					  <option value="4"> <a href="">4</a> </option>
-					  <option value="5"> <a href="">5</a> </option>
-					</select>	
-				<input id="text" type="text" placeholder="Write a Review" class="col-12">
-				<input type="submit" value="submit" class="px-2 btn-success my-2">			
-	</div>`
+		<div id="formRating" class="bg-light p-3 rounded container border-5 border-warning row">
+				<div class="h3 text-weight-bold text-center col-11"> Tell Us About <strong> ${ratingRestaurant.name} </strong> </div>
+				<div class="btn-danger float-right px-1 py-2 text-light text-center col">X</div>
+				<input id="name" type="text" placeholder="name" class="col-6 py-1 col-4">
+				<div>
+					<label for="rateByUser col-2">Rate:</label>
+						<select id="rateByUser" name="rateByUser" >
+					  		<option value="1"> <a href="">1</a> </option>
+					  		<option value="2"> <a href="">2</a> </option>
+					  		<option value="3"> <a href="">3</a> </option>
+					  		<option value="4"> <a href="">4</a> </option>
+					  		<option value="5"> <a href="">5</a> </option>
+						</select>
+				</div>
+				<input id="text" type="text" placeholder="Write a Review" class="col-12 py-1 my-2">
+				<input id="submitReview" type="submit" value="submit" class="px-2 btn-success my-2">			
+		</div>`
+
+	submitReview.addEventListener('click', )	
+
 }
 
 const generateRestaurants = (x) =>{
